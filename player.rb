@@ -1,11 +1,13 @@
 class Player
+  
   # contains information about the player, and actions they can take
   # instance variables: lives x3
-  # methods: ask_question, answer_question, lose
-
+  # methods: ask_question, answer_question, win
+  
+  attr_reader :name
   attr_accessor :points
-
-  def intitialize(name)
+  
+  def initialize(name)
     @name = name
     @points = 0
   end
@@ -17,17 +19,22 @@ class Player
     puts "#{@name} please enter a second number"
     second = gets.chomp
     puts "#{@name} you chose #{second}"
-    puts "#{@name} what does #{first} plus #{second} equal?"
-    first + second
+    puts "Question: what does #{first} plus #{second} equal?"
+    first.to_i + second.to_i
   end
 
   def answer_question(real_answer)
     answer = gets.chomp
-    if answer = real_answer
+    if answer.to_i == real_answer
       puts "YES! You are correct!"
-      points += 1
+      @points += 1
     else
       puts "Seriously? No!"
     end
   end
+
+  def win?
+    @points == 3
+  end
+
 end
